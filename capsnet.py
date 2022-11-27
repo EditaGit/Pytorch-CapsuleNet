@@ -34,8 +34,8 @@ class PrimaryCaps(nn.Module):
         u = u.view(x.size(0), self.num_routes, -1)
         return self.squash(u)
 
-    def squash(self, input_tensor):
-        squared_norm = (input_tensor ** 2).sum(-1, keepdim=True)
+    def squash(self, input_tensor, epsilon=1e-7):
+        squared_norm = (input_tensor ** 2 + epsilon).sum(-1, keepdim=True)
         output_tensor = squared_norm * input_tensor / ((1. + squared_norm) * torch.sqrt(squared_norm))
         return output_tensor
 
@@ -75,8 +75,8 @@ class DigitCaps(nn.Module):
 
         return v_j.squeeze(1)
 
-    def squash(self, input_tensor):
-        squared_norm = (input_tensor ** 2).sum(-1, keepdim=True)
+    def squash(self, input_tensor, epsilon=1e-7):
+        squared_norm = (input_tensor ** 2 + epsilon).sum(-1, keepdim=True)
         output_tensor = squared_norm * input_tensor / ((1. + squared_norm) * torch.sqrt(squared_norm))
         return output_tensor
 
@@ -88,7 +88,7 @@ class Decoder(nn.Module):
         self.input_height = input_height
         self.input_channel = input_channel
         self.reconstraction_layers = nn.Sequential(
-            nn.Linear(16 * 10, 512),
+            nn.Linear(16 * 2, 512),
             nn.ReLU(inplace=True),
             nn.Linear(512, 1024),
             nn.ReLU(inplace=True),
@@ -101,7 +101,7 @@ class Decoder(nn.Module):
         classes = F.softmax(classes, dim=0)
 
         _, max_length_indices = classes.max(dim=1)
-        masked = Variable(torch.sparse.torch.eye(10))
+        masked = Variable(torch.sparse.torch.eye(2))
         if USE_CUDA:
             masked = masked.cuda()
         masked = masked.index_select(dim=0, index=Variable(max_length_indices.squeeze(1).data))
