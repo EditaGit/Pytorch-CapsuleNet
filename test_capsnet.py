@@ -330,7 +330,7 @@ if __name__ == '__main__':
     #print(float(my_data[0][1]))
 
 
-    #split_fingerprint_and_classify_bb(model, "/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/images/102_6.jpg","/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/images/102_6.txt")
+    split_fingerprint_and_classify_bb(model, "/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/images/102_6.jpg","/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/images/102_6.txt")
 
     tester(model, mnist.test_acc)
 
