@@ -3,7 +3,7 @@ from random import random
 import torch
 import matplotlib.pyplot as plt
 from torchvision import datasets, transforms
-
+from numpy import genfromtxt
 
 class Dataset:
     def __init__(self, dataset, _batch_size):
@@ -49,19 +49,26 @@ class Dataset:
                 transforms.Grayscale()
             ])
 
-            train_dataset = datasets.ImageFolder('/home/edka/PycharmProjects/Pytorch-CapsuleNet/train',
-                                                 transform=dataset_transform)
-            test_dataset = datasets.ImageFolder('/home/edka/PycharmProjects/Pytorch-CapsuleNet/test',
-                                          transform=dataset_transform)
+            train_dataset = datasets.ImageFolder('/home/edka/PycharmProjects/Pytorch-CapsuleNet/train_14',
+                                                transform=dataset_transform)
 
-            # print(train_dataset[25][0])
-            #
-            # a = train_dataset[25][0].resize_([28,28,1])
-            #
-            # plt.imshow(a)
-            # plt.title(f"Training example #{25}")
-            # plt.axis('off')
-            # plt.show()
+
+            test_dataset = datasets.ImageFolder('/home/edka/PycharmProjects/Pytorch-CapsuleNet/test_14',
+                                              transform=dataset_transform)
+
+            test_acc = datasets.ImageFolder('/home/edka/PycharmProjects/Pytorch-CapsuleNet/test_14_accuracy',
+                                                transform=dataset_transform)
+
+            test = datasets.ImageFolder('/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/images/images',
+                                           transform=dataset_transform)
+
+
+
 
             self.train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=_batch_size, shuffle=True)
             self.test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=_batch_size, shuffle=True)
+            self.test_acc = torch.utils.data.DataLoader(test_acc, batch_size=_batch_size, shuffle=True)
+            self.test= torch.utils.data.DataLoader(test, batch_size=_batch_size, shuffle=True)
+
+
+#
