@@ -62,13 +62,14 @@ class Dataset:
             test = datasets.ImageFolder('/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/images/images',
                                            transform=dataset_transform)
 
-
-
+            same = datasets.ImageFolder('/home/edka/PycharmProjects/Pytorch-CapsuleNet/same_images',
+                                        transform=dataset_transform)
 
             self.train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=_batch_size, shuffle=True)
             self.test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=_batch_size, shuffle=True)
             self.test_acc = torch.utils.data.DataLoader(test_acc, batch_size=_batch_size, shuffle=True)
             self.test= torch.utils.data.DataLoader(test, batch_size=_batch_size, shuffle=True)
+            self.same = torch.utils.data.DataLoader(same, batch_size=_batch_size, shuffle=False)
 
 
 #

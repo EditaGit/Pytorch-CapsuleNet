@@ -72,11 +72,11 @@ class DigitCaps(nn.Module):
             v_j = self.squash(s_j)
             if iteration < num_iterations - 1:
                 a_ij = torch.matmul(u_hat.transpose(3, 4), torch.cat([v_j] * self.num_routes, dim=1))
-                ##print(iteration, a_ij)
+                print(iteration, a_ij)
                 #####
                 b_ij = b_ij + a_ij.squeeze(4).mean(dim=0, keepdim=True)
                 #####
-                # print('zle')
+                # print('napicu')
                 # print(a_ij.shape)
                 # print(iteration, a_ij.squeeze(4).mean(dim=1, keepdim=True))
         return v_j.squeeze(1)

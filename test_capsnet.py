@@ -19,7 +19,7 @@ from PIL import Image, ImageOps
 import io
 
 USE_CUDA = True if torch.cuda.is_available() else False
-BATCH_SIZE = 989
+BATCH_SIZE = 10
 N_EPOCHS = 25
 LEARNING_RATE = 0.005
 MOMENTUM = 0.9
@@ -291,7 +291,7 @@ def split_fingerprint_and_classify_bb(capsule_net, test_sample, txt):
 
         print(one_bb)
         data_to_txt.append(one_bb)
-    np.savetxt('my_file.txt', data_to_txt)
+    np.savetxt('vystup.txt', data_to_txt)
 
 
 
@@ -317,21 +317,22 @@ if __name__ == '__main__':
     #  os.makedirs('model_delete_softmax', exist_ok=True)
     #  torch.save(capsule_net, 'model_delete_softmax/checkpoint_epoch' + str(e))
 
-    #model = torch.load('model_delete_softmax/checkpoint_epoch49')
-    model = torch.load('model_delete_softmax/checkpoint_epoch24')
+    model = torch.load('model_valid/checkpoint_epoch49')
+
+    #model = torch.load('model_delete_softmax/checkpoint_epoch24')
 
 
     #split_fingerprint_and_classify_bb(model,
     #                                  "/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/101_1.tif",
     #                                  "/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/101_1.txt")
-#
-    #my_data = genfromtxt("my_file.txt", delimiter=' ')
+
+    #my_data = genfromtxt("103_3_vystup.txt", delimiter=' ')
     #print("iauhdpiouhdpwuu")
     #print(float(my_data[0][1]))
 
 
-    split_fingerprint_and_classify_bb(model, "/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/images/102_6.jpg","/home/edka/PycharmProjects/Pytorch-CapsuleNet/images/images/102_6.txt")
+    split_fingerprint_and_classify_bb(model, "/home/edka/PycharmProjects/Pytorch-CapsuleNet/prezentacia/prezentacia_labelImg/101_3.tif","/home/edka/PycharmProjects/Pytorch-CapsuleNet/prezentacia/prezentacia_labelImg/101_3.txt")
 
-    tester(model, mnist.test_acc)
+    #tester(model, mnist.same)
 
 
