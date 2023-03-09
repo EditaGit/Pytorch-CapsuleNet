@@ -291,7 +291,7 @@ def split_fingerprint_and_classify_bb(capsule_net, test_sample, txt):
 
         print(one_bb)
         data_to_txt.append(one_bb)
-    np.savetxt('vystup.txt', data_to_txt)
+    np.savetxt('/home/edka/PycharmProjects/Pytorch-CapsuleNet/siam_data/osoba_15/26_7_vystup.txt', data_to_txt)
 
 
 
@@ -331,8 +331,9 @@ if __name__ == '__main__':
     #print(float(my_data[0][1]))
 
 
-    split_fingerprint_and_classify_bb(model, "/home/edka/PycharmProjects/Pytorch-CapsuleNet/prezentacia/prezentacia_labelImg/101_3.tif","/home/edka/PycharmProjects/Pytorch-CapsuleNet/prezentacia/prezentacia_labelImg/101_3.txt")
+    split_fingerprint_and_classify_bb(model, "/home/edka/PycharmProjects/Pytorch-CapsuleNet/siam_data/osoba_15/26_7.tif",
+                                      "/home/edka/PycharmProjects/Pytorch-CapsuleNet/siam_data/osoba_15/26_7.txt")
 
-    #tester(model, mnist.same)
+    #tester(model, mnist.test_loader)
 
 
